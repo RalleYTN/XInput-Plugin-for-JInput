@@ -122,10 +122,11 @@ public final class XInputEnvironmentPlugin extends ControllerEnvironment impleme
 					
 					if(code == XInput.ERROR_SUCCESS) {
 						
-						boolean canVibrate = (capabilities.Flags & XInput.XINPUT_CAPS_FFB_SUPPORTED) != 0;
+						boolean hasLeftMotor = capabilities.Vibration.wLeftMotorSpeed > 0;
+						boolean hasRightMotor = capabilities.Vibration.wRightMotorSpeed > 0;
 						boolean noNavigation = (capabilities.Flags & XInput.XINPUT_CAPS_NO_NAVIGATION) != 0;
 						XIComponent[] components = this.createComponents(noNavigation);
-						XIRumbler[] rumblers = this.createRumblers(dwUserIndex, canVibrate);
+						XIRumbler[] rumblers = this.createRumblers(dwUserIndex, hasLeftMotor, hasRightMotor);
 						controllers[index] = new XIController(dwUserIndex, controller.getName(), components, rumblers);
 						replaced = true;
 					}
@@ -176,23 +177,18 @@ public final class XInputEnvironmentPlugin extends ControllerEnvironment impleme
 		return components.toArray(new XIComponent[components.size()]);
 	}
 	
-	private final XIRumbler[] createRumblers(int userIndex, boolean canVibrate) {
+	private final XIRumbler[] createRumblers(int userIndex, boolean hasLeftMotor, boolean hasRightMotor) {
 		
 		// It is important that both rumblers share the same vibration object.
 		// If they do not, only one can rumble at a time.
 		
-		if(canVibrate) {
-			
-			XInputVibration vibration = new XInputVibration();
-			
-			return new XIRumbler[] {
-					
-				new XIRumbler(Axis.X, vibration, userIndex),
-				new XIRumbler(Axis.RX, vibration, userIndex)
-			};
-		}
-
-		return new XIRumbler[0];
+		XInputVibration vibration = new XInputVibration();
+		ArrayList<XIRumbler> rumblers = new ArrayList<>();
+		
+		if(hasLeftMotor) rumblers.add(new XIRumbler(Axis.X, vibration, userIndex));
+		if(hasRightMotor) rumblers.add(new XIRumbler(Axis.RX, vibration, userIndex));
+		
+		return rumblers.toArray(new XIRumbler[rumblers.size()]);
 	}
 	
 	private static final boolean isXInput(Controller controller) {
