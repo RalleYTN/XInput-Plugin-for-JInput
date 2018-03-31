@@ -4,5 +4,5 @@ sudo: false
 jdk:
     - oraclejdk9
 
-scripts:
-    - mvn clean install -Dmaven.test.skip=true
+install:
+    - mvn install -DskipTests=true -Dmaven.test.skip=true -Dmaven.javadoc.skip=true -B -V
