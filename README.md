@@ -23,6 +23,12 @@ Controller[] controllers = env.getControllers();
 
 ## Changelog
 
+### Version 1.1.0
+
+- If a gamepad has no rumblers, no Rumbler objects will be returned.
+- If a gamepad has no navigation (no START, BACK and POV) then these components will not be returned.
+- Added a `module-info.java`.
+
 ### Version 1.0.0
 
 - Release

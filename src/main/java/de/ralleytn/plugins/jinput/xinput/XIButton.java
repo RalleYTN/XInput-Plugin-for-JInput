@@ -27,25 +27,8 @@ import net.java.games.input.Component.Identifier.Button;
 
 final class XIButton extends XIComponent {
 
-	protected XIButton(Button id) {
+	protected XIButton(String name, Button id) {
 		
-		super(XIButton.getMappedName(id), id);
-	}
-	
-	private static final String getMappedName(Button id) {
-		
-		       if(id == Button._0) {return "a";
-		} else if(id == Button._1) {return "b";
-		} else if(id == Button._2) {return "x";
-		} else if(id == Button._3) {return "y";
-		} else if(id == Button._4) {return "lb";
-		} else if(id == Button._5) {return "rb";
-		} else if(id == Button._6) {return "back";
-		} else if(id == Button._7) {return "start";
-		} else if(id == Button._8) {return "lthumb";
-		} else if(id == Button._9) {return "rthumb";
-		}
-		
-		return null;
+		super(name, id);
 	}
 }

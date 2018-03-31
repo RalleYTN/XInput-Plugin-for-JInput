@@ -27,6 +27,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import de.ralleytn.wrapper.microsoft.xinput.XInput;
+import de.ralleytn.wrapper.microsoft.xinput.XInputCapabilities;
 import de.ralleytn.wrapper.microsoft.xinput.XInputState;
 import de.ralleytn.wrapper.microsoft.xinput.XInputVibration;
 import net.java.games.input.Component;
@@ -116,8 +117,18 @@ public final class XInputEnvironmentPlugin extends ControllerEnvironment impleme
 				
 				if(dwUserIndex != -1) {
 					
-					controllers[index] = new XIController(dwUserIndex, controller.getName(), this.createComponents(), this.createRumblers(dwUserIndex));
-					replaced = true;
+					XInputCapabilities capabilities = new XInputCapabilities();
+					int code = XINPUT.XInputGetCapabilities(dwUserIndex, XInput.XINPUT_FLAG_GAMEPAD, capabilities);
+					
+					if(code == XInput.ERROR_SUCCESS) {
+						
+						boolean canVibrate = (capabilities.Flags & XInput.XINPUT_CAPS_FFB_SUPPORTED) != 0;
+						boolean noNavigation = (capabilities.Flags & XInput.XINPUT_CAPS_NO_NAVIGATION) != 0;
+						XIComponent[] components = this.createComponents(noNavigation);
+						XIRumbler[] rumblers = this.createRumblers(dwUserIndex, canVibrate);
+						controllers[index] = new XIController(dwUserIndex, controller.getName(), components, rumblers);
+						replaced = true;
+					}
 				}
 			}
 			
@@ -130,42 +141,58 @@ public final class XInputEnvironmentPlugin extends ControllerEnvironment impleme
 		return controllers;
 	}
 	
-	private final XIComponent[] createComponents() {
+	private final XIComponent[] createComponents(boolean noNavigation) {
 		
-		return new XIComponent[] {
-				
-			new XIButton(Button._0),
-			new XIButton(Button._1),
-			new XIButton(Button._2),
-			new XIButton(Button._3),
-			new XIButton(Button._4),
-			new XIButton(Button._5),
-			new XIButton(Button._6),
-			new XIButton(Button._7),
-			new XIButton(Button._8),
-			new XIButton(Button._9),
-			new XIPOV(),
-			new XITrigger(Axis.Z),
-			new XITrigger(Axis.RZ),
-			new XILeftThumbStick(Axis.X),
-			new XILeftThumbStick(Axis.Y),
-			new XIRightThumbStick(Axis.RX),
-			new XIRightThumbStick(Axis.RY)
-		};
+		ArrayList<XIComponent> components = new ArrayList<>();
+		
+		components.add(new XIButton("a", Button._0));
+		components.add(new XIButton("b", Button._1));
+		components.add(new XIButton("x", Button._2));
+		components.add(new XIButton("y", Button._3));
+		components.add(new XIButton("lb", Button._4));
+		components.add(new XIButton("rb", Button._5));
+		
+		if(noNavigation) {
+			
+			components.add(new XIButton("lthumb", Button._6));
+			components.add(new XIButton("rthumb", Button._7));
+			
+		} else {
+			
+			components.add(new XIButton("back", Button._6));
+			components.add(new XIButton("start", Button._7));
+			components.add(new XIButton("lthumb", Button._8));
+			components.add(new XIButton("rthumb", Button._9));
+			components.add(new XIPOV());
+		}
+		
+		components.add(new XITrigger(Axis.Z));
+		components.add(new XITrigger(Axis.RZ));
+		components.add(new XILeftThumbStick(Axis.X));
+		components.add(new XILeftThumbStick(Axis.Y));
+		components.add(new XIRightThumbStick(Axis.RX));
+		components.add(new XIRightThumbStick(Axis.RY));
+		
+		return components.toArray(new XIComponent[components.size()]);
 	}
 	
-	private final XIRumbler[] createRumblers(int userIndex) {
+	private final XIRumbler[] createRumblers(int userIndex, boolean canVibrate) {
 		
 		// It is important that both rumblers share the same vibration object.
 		// If they do not, only one can rumble at a time.
 		
-		XInputVibration vibration = new XInputVibration();
-		
-		return new XIRumbler[] {
-				
-			new XIRumbler(Axis.X, vibration, userIndex),
-			new XIRumbler(Axis.RX, vibration, userIndex)
-		};
+		if(canVibrate) {
+			
+			XInputVibration vibration = new XInputVibration();
+			
+			return new XIRumbler[] {
+					
+				new XIRumbler(Axis.X, vibration, userIndex),
+				new XIRumbler(Axis.RX, vibration, userIndex)
+			};
+		}
+
+		return new XIRumbler[0];
 	}
 	
 	private static final boolean isXInput(Controller controller) {

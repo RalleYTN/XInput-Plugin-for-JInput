@@ -3,7 +3,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>de.ralleytn.plugins.jinput.xinput</groupId>
 	<artifactId>XInput-Plugin-for-JInput</artifactId>
-	<version>1.0.0</version>
+	<version>1.1.0</version>
 	<name>XInput Plugin for JInput</name>
 	<properties>
       <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -53,7 +53,7 @@
 		<dependency>
 			<groupId>com.github.RalleYTN</groupId>
 			<artifactId>XInput-Wrapper</artifactId>
-			<version>1.0.0</version>
+			<version>1.1.0</version>
 		</dependency>
 		<dependency>
 			<groupId>net.java.jinput</groupId>
