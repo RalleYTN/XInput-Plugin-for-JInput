@@ -35,7 +35,8 @@ import net.java.games.input.Event;
 
 final class XIController extends AbstractController {
 
-	private int dwUserIndex;
+	private final int dwUserIndex;
+	
 	private XInputState oldState;
 	private Queue<Event> events;
 	private int eventQueueSize;
@@ -43,12 +44,7 @@ final class XIController extends AbstractController {
 	protected XIController(int dwUserIndex, String name, XIComponent[] components, XIRumbler[] rumblers) {
 		
 		super(name, components, null, rumblers);
-		
-		for(XIRumbler rumbler : rumblers) {
-			
-			rumbler.setController(this);
-		}
-		
+
 		this.eventQueueSize = 32;
 		this.events = new ArrayBlockingQueue<>(this.eventQueueSize);
 		this.dwUserIndex = dwUserIndex;

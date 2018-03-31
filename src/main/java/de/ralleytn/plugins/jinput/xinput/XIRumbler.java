@@ -32,17 +32,15 @@ final class XIRumbler implements Rumbler {
 
 	private static final int MAX_VALUE = 65535;
 	
-	private XIController controller;
+	private final int userIndex;
 	private final Axis axis;
+	private final XInputVibration vibration;
 	
-	protected XIRumbler(Axis axis) {
+	protected XIRumbler(Axis axis, XInputVibration vibration, int userIndex) {
 		
 		this.axis = axis;
-	}
-	
-	protected final void setController(XIController controller) {
-		
-		this.controller = controller;
+		this.vibration = vibration;
+		this.userIndex = userIndex;
 	}
 	
 	@Override
@@ -60,17 +58,15 @@ final class XIRumbler implements Rumbler {
 	@Override
 	public final void rumble(float intensity) {
 		
-		XInputVibration vibration = new XInputVibration();
-		
 		if(Axis.RX.equals(this.axis)) {
 			
-			vibration.wRightMotorSpeed = (short)((int)(intensity * MAX_VALUE) + Short.MIN_VALUE);
+			this.vibration.wRightMotorSpeed = (short)((int)(intensity * MAX_VALUE) + Short.MIN_VALUE);
 			
 		} else if(Axis.X.equals(this.axis)) {
 			
-			vibration.wLeftMotorSpeed = (short)((int)(intensity * MAX_VALUE) + Short.MIN_VALUE);
+			this.vibration.wLeftMotorSpeed = (short)((int)(intensity * MAX_VALUE) + Short.MIN_VALUE);
 		}
 		
-		XInputEnvironmentPlugin.XINPUT.XInputSetState(this.controller.getUserIndex(), vibration);
+		XInputEnvironmentPlugin.XINPUT.XInputSetState(this.userIndex, this.vibration);
 	}
 }

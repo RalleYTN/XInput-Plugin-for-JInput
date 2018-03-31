@@ -21,49 +21,65 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package de.ralleytn.plugins.jinput.xinput;
+package de.ralleytn.plugins.jinput.xinput.tests;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import net.java.games.input.Component;
-import net.java.games.input.Event;
+import javax.swing.BorderFactory;
+import javax.swing.BoxLayout;
+import javax.swing.JCheckBox;
+import javax.swing.JPanel;
 
-final class XIEventFactory {
+final class CheckList {
 
-	private final XIController controller;
-	private final XIPollData oldPollData;
-	private final XIPollData newPollData;
+	private final JPanel panel;
+	private final List<JCheckBox> checkBoxes;
 	
-	protected XIEventFactory(XIController controller, XIPollData oldPollData, XIPollData newPollData) {
+	protected CheckList(String name, String[] items) {
 		
-		this.controller = controller;
-		this.oldPollData = oldPollData;
-		this.newPollData = newPollData;
+		this.checkBoxes = new ArrayList<>();
+		
+		this.panel = new JPanel();
+		this.panel.setLayout(new BoxLayout(this.panel, BoxLayout.Y_AXIS));
+		this.panel.setBorder(BorderFactory.createTitledBorder(name));
+		
+		for(String item : items) {
+			
+			JCheckBox checkBox = new JCheckBox(item.toString());
+			checkBox.setEnabled(false);
+			this.checkBoxes.add(checkBox);
+			this.panel.add(checkBox);
+		}
 	}
 	
-	protected final List<Event> createEvents() {
+	protected final void check(String item) {
 		
-		List<Event> events = new ArrayList<>();
-		
-		for(Component component : this.controller.getComponents()) {
+		for(JCheckBox checkBox : this.checkBoxes) {
 			
-			float oldValue = this.oldPollData.getDataByComponent(component);
-			float newValue = this.newPollData.getDataByComponent(component);
-
-			if(events.size() < this.controller.getEventQueueSize() && oldValue != newValue) {
+			if(checkBox.getText().equals(item.toString())) {
 				
-				events.add(createEvent(component, newValue));
+				checkBox.setSelected(true);
+				break;
+			}
+		}
+	}
+	
+	protected final boolean hasUncheckedItems() {
+		
+		for(JCheckBox checkbox : this.checkBoxes) {
+			
+			if(!checkbox.isSelected()) {
+				
+				return true;
 			}
 		}
 		
-		return events;
+		return false;
 	}
 	
-	private static final Event createEvent(Component component, float value) {
+	protected final JPanel getPanel() {
 		
-		Event event = new Event();
-		event.set(component, value, 0);
-		return event;
+		return this.panel;
 	}
 }

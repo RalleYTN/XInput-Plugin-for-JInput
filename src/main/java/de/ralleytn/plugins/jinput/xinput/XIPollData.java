@@ -39,6 +39,8 @@ final class XIPollData {
 	private float rb;
 	private float lthumb;
 	private float rthumb;
+	private float start;
+	private float back;
 	private float lt;
 	private float rt;
 	private float lx;
@@ -115,6 +117,8 @@ final class XIPollData {
 		this.rb = this.calcButtonData(buttons, XINPUT_GAMEPAD_RIGHT_SHOULDER);
 		this.lthumb = this.calcButtonData(buttons, XINPUT_GAMEPAD_LEFT_THUMB);
 		this.rthumb = this.calcButtonData(buttons, XINPUT_GAMEPAD_RIGHT_THUMB);
+		this.start = this.calcButtonData(buttons, XINPUT_GAMEPAD_START);
+		this.back = this.calcButtonData(buttons, XINPUT_GAMEPAD_BACK);
 	}
 	
 	private final float calcButtonData(short buttons, int button) {
@@ -131,21 +135,23 @@ final class XIPollData {
 		
 		String name = component.getName();
 		
-		       if(name.equals("x")) {return this.x;
-		} else if(name.equals("y")) {return this.y;
-		} else if(name.equals("a")) {return this.a;
-		} else if(name.equals("b")) {return this.b;
-		} else if(name.equals("lb")) {return this.lb;
-		} else if(name.equals("rb")) {return this.rb;
-		} else if(name.equals("lthumb")) {return this.lthumb;
-		} else if(name.equals("rthumb")) {return this.rthumb;
-		} else if(name.equals("lt")) {return this.lt;
-		} else if(name.equals("rt")) {return this.rt;
-		} else if(name.equals("lx")) {return this.lx;
-		} else if(name.equals("ly")) {return this.ly;
-		} else if(name.equals("rx")) {return this.rx;
-		} else if(name.equals("ry")) {return this.ry;
-		} else if(name.equals("pov")) {return this.pov;
+		       if("x".equals(name)) {return this.x;
+		} else if("y".equals(name)) {return this.y;
+		} else if("a".equals(name)) {return this.a;
+		} else if("b".equals(name)) {return this.b;
+		} else if("lb".equals(name)) {return this.lb;
+		} else if("rb".equals(name)) {return this.rb;
+		} else if("lthumb".equals(name)) {return this.lthumb;
+		} else if("rthumb".equals(name)) {return this.rthumb;
+		} else if("back".equals(name)) {return this.back;
+		} else if("start".equals(name)) {return this.start;
+		} else if("lt".equals(name)) {return this.lt;
+		} else if("rt".equals(name)) {return this.rt;
+		} else if("lx".equals(name)) {return this.lx;
+		} else if("ly".equals(name)) {return this.ly;
+		} else if("rx".equals(name)) {return this.rx;
+		} else if("ry".equals(name)) {return this.ry;
+		} else if("pov".equals(name)) {return this.pov;
 		}
 		       
 		return 0.0F;

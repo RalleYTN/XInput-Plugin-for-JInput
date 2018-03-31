@@ -28,6 +28,7 @@ import java.util.List;
 
 import de.ralleytn.wrapper.microsoft.xinput.XInput;
 import de.ralleytn.wrapper.microsoft.xinput.XInputState;
+import de.ralleytn.wrapper.microsoft.xinput.XInputVibration;
 import net.java.games.input.Component;
 import net.java.games.input.Component.Identifier;
 import net.java.games.input.Component.Identifier.Axis;
@@ -115,7 +116,7 @@ public final class XInputEnvironmentPlugin extends ControllerEnvironment impleme
 				
 				if(dwUserIndex != -1) {
 					
-					controllers[index] = new XIController(dwUserIndex, controller.getName(), this.createComponents(), this.createRumblers());
+					controllers[index] = new XIController(dwUserIndex, controller.getName(), this.createComponents(), this.createRumblers(dwUserIndex));
 					replaced = true;
 				}
 			}
@@ -153,12 +154,17 @@ public final class XInputEnvironmentPlugin extends ControllerEnvironment impleme
 		};
 	}
 	
-	private final XIRumbler[] createRumblers() {
+	private final XIRumbler[] createRumblers(int userIndex) {
+		
+		// It is important that both rumblers share the same vibration object.
+		// If they do not, only one can rumble at a time.
+		
+		XInputVibration vibration = new XInputVibration();
 		
 		return new XIRumbler[] {
 				
-			new XIRumbler(Axis.X),
-			new XIRumbler(Axis.RX)
+			new XIRumbler(Axis.X, vibration, userIndex),
+			new XIRumbler(Axis.RX, vibration, userIndex)
 		};
 	}
 	
