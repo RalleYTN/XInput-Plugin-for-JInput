@@ -5,4 +5,4 @@ jdk:
     - oraclejdk9
 
 scripts:
-    - mvn clean -Dmaven.test.skip=true
+    - mvn clean install -Dmaven.test.skip=true
