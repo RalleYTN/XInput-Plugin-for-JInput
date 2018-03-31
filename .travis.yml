@@ -5,4 +5,4 @@ jdk:
     - oraclejdk9
 
 scripts:
-    - mvn clean
+    - mvn clean -Dmaven.test.skip=true
