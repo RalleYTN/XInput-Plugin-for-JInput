@@ -21,7 +21,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package de.ralleytn.plugins.jinput.xinput.tests;
+package de.ralleytn.plugins.jinput.xinput;
 
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
@@ -35,7 +35,7 @@ import net.java.games.input.Event;
 import net.java.games.input.EventQueue;
 import net.java.games.input.Rumbler;
 
-class XInputPluginTest {
+class TestXInputEnvironmentPlugin {
 
 	private static final Controller[] getControllers() {
 		
@@ -107,7 +107,7 @@ class XInputPluginTest {
 		Controller gamepad = getXInputGamepad(getControllers());
 		assertNotNull(gamepad);
 		
-		XIControllerTestFrame frame = new XIControllerTestFrame();
+		TestFrame frame = new TestFrame();
 		frame.setVisible(true);
 		
 		while(gamepad.poll() && frame.hasUncheckedItems()) {

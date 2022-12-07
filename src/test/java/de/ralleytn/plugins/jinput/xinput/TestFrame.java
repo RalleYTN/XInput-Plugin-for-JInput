@@ -21,32 +21,32 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package de.ralleytn.plugins.jinput.xinput.tests;
+package de.ralleytn.plugins.jinput.xinput;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
-final class XIControllerTestFrame extends JFrame{
+public final class TestFrame extends JFrame{
 
 	private static final long serialVersionUID = -3213276390930472608L;
 	
-	private final CheckList buttons;
-	private final CheckList lt;
-	private final CheckList rt;
-	private final CheckList lthumb;
-	private final CheckList rthumb;
-	private final CheckList pov;
+	private final TestCheckList buttons;
+	private final TestCheckList lt;
+	private final TestCheckList rt;
+	private final TestCheckList lthumb;
+	private final TestCheckList rthumb;
+	private final TestCheckList pov;
 	
-	protected XIControllerTestFrame() {
+	protected TestFrame() {
 		
 		super("Do the following things");
 		
-		this.buttons = new CheckList("Buttons", new String[] {"A", "B", "X", "Y", "LB", "RB", "START", "BACK", "LTHUMB", "RTHUMB"});
-		this.lt = new CheckList("Left Trigger", new String[] {"25%", "50%", "75%", "100%"});
-		this.rt = new CheckList("Right Trigger", new String[] {"25%", "50%", "75%", "100%"});
-		this.lthumb = new CheckList("Left Thumb Stick", new String[] {"UP", "DOWN", "LEFT", "RIGHT"});
-		this.rthumb = new CheckList("Right Thumb Stick", new String[] {"UP", "DOWN", "LEFT", "RIGHT"});
-		this.pov = new CheckList("POV", new String[] {"NORTH", "NORTH_EAST", "EAST", "SOUTH_EAST", "SOUTH", "SOUTH_WEST", "WEST", "NORTH_WEST"});
+		this.buttons = new TestCheckList("Buttons", new String[] {"A", "B", "X", "Y", "LB", "RB", "START", "BACK", "LTHUMB", "RTHUMB"});
+		this.lt = new TestCheckList("Left Trigger", new String[] {"25%", "50%", "75%", "100%"});
+		this.rt = new TestCheckList("Right Trigger", new String[] {"25%", "50%", "75%", "100%"});
+		this.lthumb = new TestCheckList("Left Thumb Stick", new String[] {"UP", "DOWN", "LEFT", "RIGHT"});
+		this.rthumb = new TestCheckList("Right Thumb Stick", new String[] {"UP", "DOWN", "LEFT", "RIGHT"});
+		this.pov = new TestCheckList("POV", new String[] {"NORTH", "NORTH_EAST", "EAST", "SOUTH_EAST", "SOUTH", "SOUTH_WEST", "WEST", "NORTH_WEST"});
 		
 		JPanel contentPane = new JPanel();
 		contentPane.add(this.buttons.getPanel());

@@ -21,7 +21,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package de.ralleytn.plugins.jinput.xinput.tests;
+package de.ralleytn.plugins.jinput.xinput;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -31,12 +31,12 @@ import javax.swing.BoxLayout;
 import javax.swing.JCheckBox;
 import javax.swing.JPanel;
 
-final class CheckList {
+public final class TestCheckList {
 
 	private final JPanel panel;
 	private final List<JCheckBox> checkBoxes;
 	
-	protected CheckList(String name, String[] items) {
+	protected TestCheckList(String name, String[] items) {
 		
 		this.checkBoxes = new ArrayList<>();
 		
