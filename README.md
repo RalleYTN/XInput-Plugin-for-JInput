@@ -1,14 +1,13 @@
-[![Build Result](https://api.travis-ci.org/RalleYTN/XInput-Plugin-for-JInput.svg?branch=master)](https://travis-ci.org/RalleYTN/XInput-Plugin-for-JInput)
-[![Coverage Status](https://coveralls.io/repos/github/RalleYTN/XInput-Plugin-for-JInput/badge.svg?branch=master)](https://coveralls.io/github/RalleYTN/XInput-Plugin-for-JInput?branch=master)
-[![Codacy Badge](https://api.codacy.com/project/badge/Grade/f294893173c04364bbce3c0f94cdbd6f)](https://www.codacy.com/app/ralph.niemitz/XInput-Plugin-for-JInput?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=RalleYTN/XInput-Plugin-for-JInput&amp;utm_campaign=Badge_Grade)
+[![CircleCI](https://dl.circleci.com/status-badge/img/gh/RalleYTN/XInput-Plugin-for-JInput/tree/master.svg?style=svg)](https://dl.circleci.com/status-badge/redirect/gh/RalleYTN/XInput-Plugin-for-JInput/tree/master)
+[![CodeFactor](https://www.codefactor.io/repository/github/ralleytn/xinput-plugin-for-jinput/badge)](https://www.codefactor.io/repository/github/ralleytn/xinput-plugin-for-jinput)
 
 # Description
 
-Currently JInput does not support the XInput API from Windows so I decided to write a Wrapper for XInput API, which can be found [here](https://github.com/RalleYTN/XInput-Wrapper), and use it to write
-a plugin for JInput. It just calls the already existing `DirectAndRawInputEnvironmentPlugin` and replaces the XInput controllers that the `DirectAndRawInputEnvironmentPlugin` reads with DirectInput with the
-`XIController` of this plugin. To use the plugin you just have to change the way you retrieve the controller array a little and then you can finally ask for trigger inputs separately and use the vibration function.
+Since [jinput](https://github.com/jinput/jinput) was written to be platform independent it has no plugin for the Windows specific [XInput API](https://msdn.microsoft.com/de-de/library/windows/desktop/hh405053(v=vs.85)). This can cause XBox gamepads to not function properly. This library aims to solve the problem by providing such a plugin.
 
-### To retrieve the controllers
+The components within this plugin were written with the [XInput-Wrapper](https://github.com/RalleYTN/XInput-Wrapper) to enable access to the [XInput API](https://msdn.microsoft.com/de-de/library/windows/desktop/hh405053(v=vs.85)).
+
+### Code Example
 
 ```java
 ControllerEnvironment env = new XInputEnvironmentPlugin();
@@ -21,7 +20,45 @@ if(!env.isSupported()) {
 Controller[] controllers = env.getControllers();
 ```
 
+## Maven
+
+In order to use XInput-Plugin-for-JInput as a Maven dependency in your own projects you first have to include Jitpack as a repository to your POM.
+
+```xml
+<project>
+	...
+	<repositories>
+		...
+		<repository>
+			<id>jitpack.io</id>
+			<url>https://jitpack.io</url>
+		</repository>
+		...
+	</repositories>
+	...
+</project>
+```
+
+Then add the following as dependency:
+
+```xml
+<dependency>
+	<groupId>com.github.RalleYTN</groupId>
+	<artifactId>XInput-Plugin-for-JInput</artifactId>
+	<!-- NOTE: You can also use the commit ID as version number -->
+	<version>1.2.0</version>
+</dependency>
+```
+
 ## Changelog
+
+## Changelog
+
+### Version 1.2.0
+
+- Made the library compatible with Java 11
+- Updated dependencies
+- Switched from Travis CI to CircleCI
 
 ### Version 1.1.0
 
