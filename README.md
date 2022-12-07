@@ -1,5 +1,7 @@
 [![CircleCI](https://dl.circleci.com/status-badge/img/gh/RalleYTN/XInput-Plugin-for-JInput/tree/master.svg?style=svg)](https://dl.circleci.com/status-badge/redirect/gh/RalleYTN/XInput-Plugin-for-JInput/tree/master)
 [![CodeFactor](https://www.codefactor.io/repository/github/ralleytn/xinput-plugin-for-jinput/badge)](https://www.codefactor.io/repository/github/ralleytn/xinput-plugin-for-jinput)
+[![](https://jitpack.io/v/RalleYTN/XInput-Plugin-for-JInput.svg)](https://jitpack.io/#RalleYTN/XInput-Plugin-for-JInput)
+
 
 # Description
 
