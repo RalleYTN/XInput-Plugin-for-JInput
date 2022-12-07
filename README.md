@@ -52,8 +52,6 @@ Then add the following as dependency:
 
 ## Changelog
 
-## Changelog
-
 ### Version 1.2.0
 
 - Made the library compatible with Java 11
