@@ -46,13 +46,17 @@ Then add the following as dependency:
 	<groupId>com.github.RalleYTN</groupId>
 	<artifactId>XInput-Plugin-for-JInput</artifactId>
 	<!-- NOTE: You can also use the commit ID as version number -->
-	<version>1.2.0</version>
+	<version>1.2.1</version>
 </dependency>
 ```
 
 ## Changelog
 
 ## Changelog
+
+### Version 1.2.1-SNAPSHOT
+
+- TEMPORARY BUGFIX: rumblers do not work as intended due to a problem with unsigned integers in the XInput Wrapper library; a proper fix will come at a later date
 
 ### Version 1.2.0
 
