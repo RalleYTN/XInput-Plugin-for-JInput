@@ -60,11 +60,11 @@ final class XIRumbler implements Rumbler {
 		
 		if(Axis.RX.equals(this.axis)) {
 			
-			this.vibration.wRightMotorSpeed = (short) (intensity * MAX_VALUE);
+			this.vibration.wRightMotorSpeed = (int) (intensity * MAX_VALUE);
 			
 		} else if(Axis.X.equals(this.axis)) {
 			
-			this.vibration.wLeftMotorSpeed = (short)(intensity * MAX_VALUE);
+			this.vibration.wLeftMotorSpeed = (int) (intensity * MAX_VALUE);
 		}
 		
 		XInputEnvironmentPlugin.XINPUT.XInputSetState(this.userIndex, this.vibration);

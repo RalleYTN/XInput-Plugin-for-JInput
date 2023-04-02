@@ -54,6 +54,10 @@ Then add the following as dependency:
 
 ## Changelog
 
+### Version 1.2.1
+
+- BUGFIX #3: Fixed a bug that caused rumblers to not function as intended. WARNING when updating from a previous version make sure to test wether the rumbling intensity is still within the desired range. It could happen that rumbling now has double the intensity.
+
 ### Version 1.2.1-SNAPSHOT
 
 - TEMPORARY BUGFIX: rumblers do not work as intended due to a problem with unsigned integers in the XInput Wrapper library; a proper fix will come at a later date

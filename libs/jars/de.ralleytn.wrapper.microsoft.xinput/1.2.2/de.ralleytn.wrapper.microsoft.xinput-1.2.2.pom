@@ -1,25 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-	<groupId>de.ralleytn.plugins.jinput.xinput</groupId>
-	<artifactId>XInput-Plugin-for-JInput</artifactId>
-	<version>1.2.1</version>
-	<name>XInput Plugin for JInput</name>
+	<groupId>de.ralleytn.wrapper.microsoft.xinput</groupId>
+	<artifactId>XInput-Wrapper</artifactId>
+	<version>1.2.2</version>
+	<name>XInput Wrapper</name>
 	<properties>
       <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
       <maven.compiler.release>11</maven.compiler.release>
 	</properties>
-	<description>A plugin for JInput that provides support for XInput gamepads</description>
-	<repositories>
-		<repository>
-			<id>jitpack.io</id>
-			<url>https://jitpack.io</url>
-		</repository>
-	</repositories>
+	<description>A 1:1 XInput wrapper for Java that was made with JNA.</description>
 	<licenses>
         <license>
             <name>MIT License</name>
-            <url>https://github.com/RalleYTN/XInput-Plugin-for-JInput/blob/master/LICENSE</url>
+            <url>https://github.com/RalleYTN/XInput-Wrapper/blob/master/LICENSE</url>
         </license>
 	</licenses>
 	<developers>
@@ -49,14 +43,9 @@
 	</build>
     <dependencies>
 		<dependency>
-			<groupId>com.github.RalleYTN</groupId>
-			<artifactId>XInput-Wrapper</artifactId>
-			<version>1.2.2</version>
-		</dependency>
-		<dependency>
-  			<groupId>net.java.jinput</groupId>
-  			<artifactId>jinput</artifactId>
-  			<version>2.0.9</version>
+			<groupId>net.java.dev.jna</groupId>
+			<artifactId>jna</artifactId>
+			<version>5.12.1</version>
 		</dependency>
     	<dependency>
     		<groupId>org.junit.jupiter</groupId>
