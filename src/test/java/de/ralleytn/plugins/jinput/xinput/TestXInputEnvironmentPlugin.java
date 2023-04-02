@@ -25,9 +25,11 @@ package de.ralleytn.plugins.jinput.xinput;
 
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
+import java.io.File;
+
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
-import de.ralleytn.plugins.jinput.xinput.XInputEnvironmentPlugin;
 import net.java.games.input.Component;
 import net.java.games.input.Controller;
 import net.java.games.input.ControllerEnvironment;
@@ -62,6 +64,12 @@ class TestXInputEnvironmentPlugin {
 		return null;
 	}
 	
+	@BeforeAll
+	public static void setupNatives() {
+		
+		System.setProperty("net.java.games.input.librarypath", new File("libs/natives").getAbsolutePath());
+	}
+	
 	@Test
 	public void testRumblers() {
 		
@@ -76,13 +84,15 @@ class TestXInputEnvironmentPlugin {
 				System.out.println(rumbler.getAxisName() + ", " + rumbler.getAxisIdentifier());
 			}
 			
-			System.out.println();
+			System.out.println(Short.MAX_VALUE);
+			System.out.println("Test 0.5 intensity");
 			rumblers[0].rumble(0.5F);
-			Thread.sleep(2000);
 			rumblers[1].rumble(0.5F);
 			Thread.sleep(2000);
+			System.out.println("Test 0.0 intensity");
 			rumblers[0].rumble(0);
 			rumblers[1].rumble(0);
+			Thread.sleep(2000);
 			
 		} catch(InterruptedException exception) {}
 	}

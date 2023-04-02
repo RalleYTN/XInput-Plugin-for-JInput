@@ -1,5 +1,7 @@
 [![CircleCI](https://dl.circleci.com/status-badge/img/gh/RalleYTN/XInput-Plugin-for-JInput/tree/master.svg?style=svg)](https://dl.circleci.com/status-badge/redirect/gh/RalleYTN/XInput-Plugin-for-JInput/tree/master)
 [![CodeFactor](https://www.codefactor.io/repository/github/ralleytn/xinput-plugin-for-jinput/badge)](https://www.codefactor.io/repository/github/ralleytn/xinput-plugin-for-jinput)
+[![](https://jitpack.io/v/RalleYTN/XInput-Plugin-for-JInput.svg)](https://jitpack.io/#RalleYTN/XInput-Plugin-for-JInput)
+
 
 # Description
 
@@ -46,13 +48,19 @@ Then add the following as dependency:
 	<groupId>com.github.RalleYTN</groupId>
 	<artifactId>XInput-Plugin-for-JInput</artifactId>
 	<!-- NOTE: You can also use the commit ID as version number -->
-	<version>1.2.0</version>
+	<version>1.2.1</version>
 </dependency>
 ```
 
 ## Changelog
 
-## Changelog
+### Version 1.2.1
+
+- BUGFIX #3: Fixed a bug that caused rumblers to not function as intended. WARNING when updating from a previous version make sure to test wether the rumbling intensity is still within the desired range. It could happen that rumbling now has double the intensity.
+
+### Version 1.2.1-SNAPSHOT
+
+- TEMPORARY BUGFIX: rumblers do not work as intended due to a problem with unsigned integers in the XInput Wrapper library; a proper fix will come at a later date
 
 ### Version 1.2.0
 
